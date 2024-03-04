@@ -106,7 +106,7 @@ def run(
     config = ConfigSpec()
     config.path = path
     config.training_set_sizes = training_set_sizes
-    config.teacher = "gpt-3.5-turbo"
+    config.teacher = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     config.parallelism = parallelism
     config.task = task_prompt
     config.prompt_injections = [(p, "i understand") for p in raw_pi]

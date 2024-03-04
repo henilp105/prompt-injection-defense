@@ -61,7 +61,7 @@ def rate_completions(
                 i,
                 rating_prompt.format(prompt, response),
                 16,
-                {"temperature": 0, "model": "gpt-3.5-turbo", "timeout": 30},
+                {"temperature": 0, "model": "mistralai/Mixtral-8x7B-Instruct-v0.1", "timeout": 30},
                 response_queue,
             )
         )
@@ -138,7 +138,7 @@ def call_openai(
     message,
     max_tokens,
     query_type="chat",
-    model="gpt-3.5-turbo",
+    model="mistralai/Mixtral-8x7B-Instruct-v0.1",
     temperature=1.0,
     top_p=1,
     presence_penalty=0,
@@ -156,7 +156,7 @@ def call_openai(
         message (str): The user's message prompt.
         max_tokens (int): The maximum number of tokens to generate.
         query_type (str): The type of completion to use. Defaults to "chat".
-        model (str, optional): The name of the OpenAI model to use. Defaults to "gpt-3.5-turbo".
+        model (str, optional): The name of the OpenAI model to use. Defaults to "mistralai/Mixtral-8x7B-Instruct-v0.1".
         temperature (float, optional): Controls the "creativity" of the generated text. Higher values result in more diverse text. Defaults to 1.0.
         top_p (float, optional): Controls the "quality" of the generated text. Higher values result in higher quality text. Defaults to 1.
         presence_penalty (float, optional): Controls how much the model avoids repeating words or phrases from the prompt. Defaults to 0.

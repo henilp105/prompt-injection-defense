@@ -100,7 +100,7 @@ def compare_to_ft_model(
     for temp in temperatures:
         kwargs["temperature"] = temp
         # Generate GPT Outputs
-        orig_kwargs["model"] = "gpt-3.5-turbo"
+        orig_kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
         orig_kwargs["temperature"] = temp
         GPT_outputs = label_inputs(
             GPT_inputs,

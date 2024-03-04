@@ -155,7 +155,7 @@ def jatmo_synthetic(
         dill.dump(example, outfile)
 
     labels = wrapper(
-        lambda: label_inputs(gpt_inputs, model="gpt-3.5-turbo"),
+        lambda: label_inputs(gpt_inputs, model="mistralai/Mixtral-8x7B-Instruct-v0.1"),
         path,
         "gpt_train_val_outputs.pkl",
     )
@@ -205,14 +205,14 @@ def jatmo_synthetic(
                     model_id: ft_inputs[
                         train_ct + val_ct : train_ct + val_ct + test_ct
                     ],
-                    "gpt-3.5-turbo": gpt_inputs[
+                    "mistralai/Mixtral-8x7B-Instruct-v0.1": gpt_inputs[
                         train_ct + val_ct : train_ct + val_ct + test_ct
                     ],
                 },
-                [model_id, "gpt-3.5-turbo"],
+                [model_id, "mistralai/Mixtral-8x7B-Instruct-v0.1"],
                 gpt_inputs[train_ct + val_ct : train_ct + val_ct + test_ct],
                 {
-                    "gpt-3.5-turbo": labels[
+                    "mistralai/Mixtral-8x7B-Instruct-v0.1": labels[
                         train_ct + val_ct : train_ct + val_ct + test_ct
                     ]
                 },

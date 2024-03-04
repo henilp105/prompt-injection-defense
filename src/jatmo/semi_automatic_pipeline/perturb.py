@@ -26,7 +26,7 @@ def perturb_model(
     total_queries = 0
 
     model_type = kwargs["query_type"] if "query_type" in kwargs else "chat"
-    model = kwargs["model"] if "model" in kwargs else "gpt-3.5-turbo"
+    model = kwargs["model"] if "model" in kwargs else "mistralai/Mixtral-8x7B-Instruct-v0.1"
 
     for p_idx, p in enumerate(prompt_injections):
         for i, ipt in enumerate(inputs):
@@ -95,7 +95,7 @@ def prompt_inject(
 
     gpt_kwargs = kwargs.copy()
     gpt_kwargs["query_type"] = "chat"
-    gpt_kwargs["model"] = "gpt-3.5-turbo"
+    gpt_kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     success_gpt, raw_gpt_outputs = perturb_model(
         inputs,
         prompt_injections,

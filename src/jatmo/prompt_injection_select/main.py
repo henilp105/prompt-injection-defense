@@ -12,7 +12,7 @@ from .utils import ConfigSpec
 
 
 def run(tasks, injections, parallelism=8, **kwargs):
-    kwargs["model"] = "gpt-3.5-turbo"
+    kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     kwargs["temperature"] = 1.0
 
     queue, mgr = init_servers(parallelism)
