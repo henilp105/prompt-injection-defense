@@ -46,7 +46,7 @@ def compare_to_ft_model(
 
         kwargs_reformat = kwargs.copy()
         kwargs_reformat["query_type"] = "chat"
-        kwargs_reformat["model"] = "gpt-4-1106-preview"
+        kwargs_reformat["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
         kwargs_reformat["temperature"] = 0
         kwargs_reformat["timeout"] = 60
 
