@@ -8,6 +8,10 @@ from openai import OpenAI
 from tqdm import tqdm
 
 global_process_list = []
+import os
+
+TOGETHER_API_KEY = os.environ.get("TOGETHER_API_KEY")
+
 
 
 def rate_completions(
@@ -109,7 +113,8 @@ def openai_chat_server(call_queue, leader=False):
     Returns:
         None
     """
-    client = OpenAI()
+    client = OpenAI(api_key=TOGETHER_API_KEY,
+  base_url='https://api.together.xyz',)
 
     while True:
         task = call_queue.get(block=True)
