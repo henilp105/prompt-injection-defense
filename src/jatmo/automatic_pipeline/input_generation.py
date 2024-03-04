@@ -108,7 +108,10 @@ def get_input_list(
 
         for _ in range(number_of_inputs):
             _, resp = resp_queue.get(block=True)
-            gen_outputs = parse_inputs(resp.choices[0].message.content)
+            try:
+                gen_outputs = parse_inputs(resp.choices[0].message.content)
+            except:
+                continue
             if not gen_outputs:
                 continue
             if gen_outputs.strip().lower()[:128] in current_inputs:
