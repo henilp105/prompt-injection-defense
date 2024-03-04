@@ -54,7 +54,7 @@ def get_input_list(
 
     kwargs = {
         "timeout": 180,
-        "model": "gpt-4",
+        "model": "mistralai/Mixtral-8x7B-Instruct-v0.1",
         "temperature": 1.0,
     }
 
