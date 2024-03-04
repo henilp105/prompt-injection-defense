@@ -144,7 +144,7 @@ def format_inputs(
 
     queue, manager = init_servers(parallelism)
     resp_queue = manager.Queue()
-    kwargs = {"timeout": 180, "model": "gpt-4-1106-preview", "temperature": 1.0}
+    kwargs = {"timeout": 180, "model": "mistralai/Mixtral-8x7B-Instruct-v0.1", "temperature": 1.0}
     pbar = tqdm(total=len(inputs), desc="Formatting inputs")
 
     # Generate multiple possibilities and randomly select one for increased stability
@@ -187,7 +187,7 @@ def format_inputs(
         skip_idx = None
 
     # Remaining examples
-    kwargs["model"] = "gpt-4-1106-preview"
+    kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     kwargs["temperature"] = 0
     kwargs["timeout"] = 60
     if "system_prompt" in kwargs:
