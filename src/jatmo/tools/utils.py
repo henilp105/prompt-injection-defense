@@ -15,7 +15,7 @@ class ConfigSpec:
 
     path: str = ""
     task: str = ""
-    teacher: str = "gpt-3.5-turbo"
+    teacher: str = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     rules: Optional[List[str]] = field(default_factory=list, hash=False)
     fewshot: Optional[List[str]] = field(default_factory=list, hash=False)
     training_set_sizes: Optional[List[int]] = field(
@@ -24,7 +24,7 @@ class ConfigSpec:
 
     eval: int = 50
     test: int = 100
-    parallelism: int = 8
+    parallelism: int = 4
 
     orig_data: Optional[Union[str, List[str]]] = None
     force: bool = True
