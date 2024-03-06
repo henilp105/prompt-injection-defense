@@ -122,15 +122,15 @@ def run(
     additional_rules=None,
 ):
     # First, load data
-    raw_inputs = wrapper(
-        lambda: gather_inputs(
-            os.path.join(path, "reviews.json"),
-            total_count=200 + max(training_set_sizes),
-            review_count=10,
-        ),
-        path,
-        "raw_inputs_from_dataset.pkl",
-    )
+    # raw_inputs = wrapper(
+    #     lambda: gather_inputs(
+    #         os.path.join(path, "reviews.json"),
+    #         total_count=200 + max(training_set_sizes),
+    #         review_count=10,
+    #     ),
+    #     path,
+    #     "raw_inputs_from_dataset.pkl",
+    # )
 
     # Create config
     config = ConfigSpec()
