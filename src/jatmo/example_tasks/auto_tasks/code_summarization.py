@@ -23,9 +23,9 @@ def run(
     additional_rules=None,
 ):
     # First, load data
-    raw_inputs = gather_inputs(
-        total_count=200 + max(training_set_sizes),
-    )
+    # raw_inputs = gather_inputs(
+    #     total_count=200 + max(training_set_sizes),
+    # )
 
     # Create config
     config = ConfigSpec()
