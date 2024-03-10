@@ -172,7 +172,7 @@ def format_inputs(
                         ),
                     )
                 )
-            except IndexError:
+            except:
                 continue
 
         if not len(possible_formats):
