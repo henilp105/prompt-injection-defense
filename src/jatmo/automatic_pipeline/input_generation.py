@@ -209,7 +209,7 @@ def format_inputs(
                 resp.choices[0].message.content,
             ).strip()
         except:
-            print(resp.choices[0])
+            continue
             # formatted_inputs[idx] # fill value if still not fixed.
         formatted_inputs[idx] = (
             task_description
