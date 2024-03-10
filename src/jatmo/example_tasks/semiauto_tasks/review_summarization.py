@@ -135,9 +135,9 @@ def run(
     config.parallelism = parallelism
     config.task = task_prompt
     config.prompt_injections = [(p, "i understand") for p in raw_pi]
-    config.prompt_injections.extend(
-        load_hackaprompt_injections(hackaprompt_path)[:10]
-    )
+    #config.prompt_injections.extend(
+    #    load_hackaprompt_injections(hackaprompt_path)[:10]
+    #)
 
     # Run
     jatmo(
