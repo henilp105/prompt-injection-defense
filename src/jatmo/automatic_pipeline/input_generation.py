@@ -189,7 +189,7 @@ def format_inputs(
     # Remaining examples
     kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     kwargs["temperature"] = 0
-    kwargs["timeout"] = 60
+    kwargs["timeout"] = 180
     if "system_prompt" in kwargs:
         del kwargs["system_prompt"]
 
@@ -202,11 +202,15 @@ def format_inputs(
     for _ in range(len(inputs) - (1 if skip_idx is not None else 0)):
         idx, resp = resp_queue.get(block=True)
         pbar.update(1)
-        formatted_inputs[idx] = re.sub(
-            r"([\s\n\t]*START)|(END[\s\n\t]*)",
-            "",
-            resp.choices[0].message.content,
-        ).strip()
+        try:
+            formatted_inputs[idx] = re.sub(
+                r"([\s\n\t]*START)|(END[\s\n\t]*)",
+                "",
+                resp.choices[0].message.content,
+            ).strip()
+        except:
+            print(resp.choices[0])
+            # formatted_inputs[idx] # fill value if still not fixed.
         formatted_inputs[idx] = (
             task_description
             + " ###\n"
