@@ -13,6 +13,7 @@ import math
 import random
 import re
 import string
+import json
 
 from tqdm import tqdm
 
@@ -126,7 +127,7 @@ def get_input_list(
 
 
 def format_inputs(
-    task_description, inputs, parallelism=8, examples=None, seed_size=10
+    task_description, inputs, parallelism=2, examples=None, seed_size=10
 ):
     """
     Format the inputs using a task description and parallel processing.
@@ -218,6 +219,8 @@ def format_inputs(
                 f.strip() for f in formatted_inputs[idx].split("###")
             )
         )
+        with open('data_pid_mixtral.json','w') as f:
+            json.dump(formatted_inputs,f)
 
     kill_servers()
 
