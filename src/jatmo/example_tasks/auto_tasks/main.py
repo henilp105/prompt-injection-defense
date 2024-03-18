@@ -13,62 +13,63 @@ Example tasks:
 
 import argparse
 
-from .code_summarization import run as run_code_summarization
-from .news_summarization import run as run_news_summarization
-from .review_summarization import run as run_review_summarization
-from .translation import run as run_translation
-from .translation import run as run_sentiment_analysis
+from code_summarization import run as run_code_summarization
+from news_summarization import run as run_news_summarization
+from review_summarization import run as run_review_summarization
+from translation import run as run_translation
+from translation import run as run_sentiment_analysis
 
 
-def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("task", type=str)
-    parser.add_argument("path", type=str)
-    parser.add_argument("-f", "--few-shot", type=int, default=0)
-    parser.add_argument(
-        "--tss", "--training-set-sizes", type=int, nargs="+", default=[400]
+# def main():
+parser = argparse.ArgumentParser()
+parser.add_argument("task", type=str)
+# parser.add_argument("path", type=str)
+parser.add_argument("-f", "--few-shot", type=int, default=0)
+parser.add_argument(
+    "--tss", "--training-set-sizes", type=int, nargs="+", default=[400]
+)
+parser.add_argument(
+    "-a", "--additional-rules", type=str, nargs="+", default=None
+)
+args = parser.parse_args()
+
+task = args.task
+# path = args.path
+training_set_sizes = args.tss
+print(task)
+
+if task == "sentiment_analysis":
+    run_sentiment_analysis(
+        training_set_sizes,
+        '.',
+        fewshot=args.few_shot,
+        additional_rules=args.additional_rules,
     )
-    parser.add_argument(
-        "-a", "--additional-rules", type=str, nargs="+", default=None
+if task == "review_summarization":
+    run_review_summarization(
+        training_set_sizes,
+        path,
+        fewshot=args.few_shot,
+        additional_rules=args.additional_rules,
     )
-    args = parser.parse_args()
-
-    task = args.task
-    path = args.path
-    training_set_sizes = args.tss
-
-    if task == "sentiment_analysis":
-        run_sentiment_analysis(
-            training_set_sizes,
-            path,
-            fewshot=args.few_shot,
-            additional_rules=args.additional_rules,
-        )
-    if task == "review_summarization":
-        run_review_summarization(
-            training_set_sizes,
-            path,
-            fewshot=args.few_shot,
-            additional_rules=args.additional_rules,
-        )
-    if task == "translation":
-        run_translation(
-            training_set_sizes,
-            path,
-            fewshot=args.few_shot,
-            additional_rules=args.additional_rules,
-        )
-    if task == "news_summarization":
-        run_news_summarization(
-            training_set_sizes,
-            path,
-            fewshot=args.few_shot,
-            additional_rules=args.additional_rules,
-        )
-    if task == "code_summarization":
-        run_code_summarization(
-            training_set_sizes,
-            path,
-            fewshot=args.few_shot,
-            additional_rules=args.additional_rules,
-        )
+if task == "translation":
+    run_translation(
+        training_set_sizes,
+        path,
+        fewshot=args.few_shot,
+        additional_rules=args.additional_rules,
+    )
+if task == "news_summarization":
+    run_news_summarization(
+        training_set_sizes,
+        path,
+        fewshot=args.few_shot,
+        additional_rules=args.additional_rules,
+    )
+if task == "code_summarization":
+    run_code_summarization(
+        training_set_sizes,
+        path,
+        fewshot=args.few_shot,
+        additional_rules=args.additional_rules,
+    )
