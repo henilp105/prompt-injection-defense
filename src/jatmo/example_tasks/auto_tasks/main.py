@@ -17,6 +17,7 @@ from .code_summarization import run as run_code_summarization
 from .news_summarization import run as run_news_summarization
 from .review_summarization import run as run_review_summarization
 from .translation import run as run_translation
+from .translation import run as run_sentiment_analysis
 
 
 def main():
@@ -36,6 +37,13 @@ def main():
     path = args.path
     training_set_sizes = args.tss
 
+    if task == "sentiment_analysis":
+        run_sentiment_analysis(
+            training_set_sizes,
+            path,
+            fewshot=args.few_shot,
+            additional_rules=args.additional_rules,
+        )
     if task == "review_summarization":
         run_review_summarization(
             training_set_sizes,
