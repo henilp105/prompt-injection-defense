@@ -13,6 +13,8 @@ import math
 import random
 import re
 import string
+import json
+import os
 
 from tqdm import tqdm
 
@@ -126,7 +128,7 @@ def get_input_list(
 
 
 def format_inputs(
-    task_description, inputs, parallelism=8, examples=None, seed_size=10
+    task_description, inputs, parallelism=2, examples=None, seed_size=10
 ):
     """
     Format the inputs using a task description and parallel processing.
@@ -172,7 +174,7 @@ def format_inputs(
                         ),
                     )
                 )
-            except IndexError:
+            except:
                 continue
 
         if not len(possible_formats):
@@ -189,7 +191,7 @@ def format_inputs(
     # Remaining examples
     kwargs["model"] = "mistralai/Mixtral-8x7B-Instruct-v0.1"
     kwargs["temperature"] = 0
-    kwargs["timeout"] = 60
+    kwargs["timeout"] = 180
     if "system_prompt" in kwargs:
         del kwargs["system_prompt"]
 
@@ -199,14 +201,20 @@ def format_inputs(
         prompt = reformat_prompt(example, ipt)
         queue.put((idx, prompt, math.inf, kwargs, resp_queue))
 
-    for _ in range(len(inputs) - (1 if skip_idx is not None else 0)):
+    c = len(json.load(open("data_pid_mixtral.json",'r'))) if os.path.exists("data_pid_mixtral.json") else 0
+
+    for _ in range(c,len(inputs) - (1 if skip_idx is not None else 0)):
         idx, resp = resp_queue.get(block=True)
         pbar.update(1)
-        formatted_inputs[idx] = re.sub(
-            r"([\s\n\t]*START)|(END[\s\n\t]*)",
-            "",
-            resp.choices[0].message.content,
-        ).strip()
+        try:
+            formatted_inputs[idx] = re.sub(
+                r"([\s\n\t]*START)|(END[\s\n\t]*)",
+                "",
+                resp.choices[0].message.content,
+            ).strip()
+        except:
+            continue
+            # formatted_inputs[idx] # fill value if still not fixed.
         formatted_inputs[idx] = (
             task_description
             + " ###\n"
@@ -214,6 +222,8 @@ def format_inputs(
                 f.strip() for f in formatted_inputs[idx].split("###")
             )
         )
+        with open('data_pid_mixtral.json','w') as f:
+            json.dump(formatted_inputs,f)
 
     kill_servers()
 
