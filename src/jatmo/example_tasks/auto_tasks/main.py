@@ -17,7 +17,7 @@ from code_summarization import run as run_code_summarization
 from news_summarization import run as run_news_summarization
 from review_summarization import run as run_review_summarization
 from translation import run as run_translation
-from translation import run as run_sentiment_analysis
+from sentiment_analysis import run as run_sentiment_analysis
 
 
 # def main():
