@@ -128,7 +128,7 @@ def get_input_list(
 
 
 def format_inputs(
-    task_description, inputs, parallelism=2, examples=None, seed_size=10
+    task_description, inputs, parallelism=16, examples=None, seed_size=10
 ):
     """
     Format the inputs using a task description and parallel processing.
