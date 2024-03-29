@@ -172,7 +172,7 @@ def call_openai(
         retry = 0
         while retry < 7:
             try:
-                if last_request_time is not None:
+                if last_request_time is None:
                     last_request_time = time.time() - last_request_time
                     return f(params)
                 else:
