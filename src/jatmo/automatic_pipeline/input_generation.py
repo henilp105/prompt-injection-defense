@@ -47,7 +47,7 @@ def get_input_list(
         list: A list of generated inputs.
     """
 
-    queue, manager = init_servers(parallelism)
+    queue, manager = init_servers(1)
     resp_queue = manager.Queue()
 
     pbar = tqdm(total=number_of_inputs, desc="Generating inputs")
