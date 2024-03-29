@@ -240,7 +240,7 @@ def call_openai(
     return loop(lambda x: client.completions.create(**x), request_params)
 
 
-def init_servers(number_of_processes=4):
+def init_servers(number_of_processes=2):
     """
     Initializes multiple chat servers using multiprocessing.
 
