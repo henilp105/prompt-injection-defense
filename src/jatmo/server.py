@@ -177,8 +177,8 @@ def call_openai(
                     last_request_time = time.time()
                     return f(params)
                 else:
-                    if time.time() - last_request_time < 1:
-                        time.sleep(1 - last_request_time)
+                    if time.time() - last_request_time < 1.25:
+                        time.sleep(1.25 - last_request_time)
                         return f(params)
                     else:
                         return f(params)
