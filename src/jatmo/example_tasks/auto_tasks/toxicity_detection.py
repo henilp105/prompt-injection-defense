@@ -64,11 +64,11 @@ def run(
     config.rules = additional_rules
 
     # Run
-    _, config = jatmo_synthetic(
-        config=config,
-        print_results=True,
-        evaluate=False,
-    )
+    # _, config = jatmo_synthetic(
+    #     config=config,
+    #     print_results=True,
+    #     evaluate=False,
+    # )
     jatmo(
         raw_inputs,
         config=config,
