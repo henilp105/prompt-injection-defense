@@ -57,7 +57,7 @@ def run(
     config.path = path
     config.training_set_sizes = training_set_sizes
     config.teacher = "gpt-3.5-turbo"
-    config.parallelism = parallelism
+    config.parallelism = 1
     config.task = task_prompt
     config.fewshot = raw_inputs[:fewshot] if fewshot else None
     config.no_formatting = True
