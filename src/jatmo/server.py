@@ -167,10 +167,11 @@ def call_openai(
     Returns:
         The generated responses from the OpenAI API.
     """
-    global last_request_time
+    
     def loop(f, params):
         retry = 0
         while retry < 7:
+            global last_request_time
             try:
                 if last_request_time is None:
                     last_request_time = time.time()
