@@ -3,6 +3,7 @@ import multiprocessing
 import re
 import signal
 import time
+import os
 
 from openai import OpenAI
 from tqdm import tqdm
@@ -109,7 +110,8 @@ def openai_chat_server(call_queue, leader=False):
     Returns:
         None
     """
-    client = OpenAI()
+    TOGETHER_API_KEY = os.environ.get("TOGETHER_API_KEY")
+    client = OpenAI(api_key=TOGETHER_API_KEY,base_url='https://api.together.xyz')
 
     while True:
         task = call_queue.get(block=True)
@@ -196,7 +198,7 @@ def call_openai(
         return None
 
     request_params = {
-        "model": model,
+        "model": "mistralai/Mixtral-8x7B-Instruct-v0.1", # fix model only to mistralai/Mixtral-8x7B-Instruct-v0.1
         "temperature": temperature,
         "top_p": top_p,
         "n": n,
