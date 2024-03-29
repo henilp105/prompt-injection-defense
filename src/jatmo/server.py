@@ -9,6 +9,7 @@ from openai import OpenAI
 from tqdm import tqdm
 
 global_process_list = []
+last_request_time = None
 
 
 def rate_completions(
@@ -166,12 +167,20 @@ def call_openai(
     Returns:
         The generated responses from the OpenAI API.
     """
-
+    global last_request_time
     def loop(f, params):
         retry = 0
         while retry < 7:
             try:
-                return f(params)
+                if last_request_time is not None:
+                    last_request_time = time.time() - last_request_time
+                    return f(params)
+                else:
+                    if time.time() - last_request_time < 1:
+                        time.sleep(1 - last_request_time)
+                        return f(params)
+                    else:
+                        return f(params)
             except Exception as e:
                 if retry > 5:
                     print(f"Error {retry}: {e}\n{params}")
