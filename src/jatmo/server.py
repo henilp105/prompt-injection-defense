@@ -179,8 +179,10 @@ def call_openai(
                 else:
                     if time.time() - last_request_time < 1.25:
                         time.sleep(1.25 - last_request_time)
+                        last_request_time = time.time()
                         return f(params)
                     else:
+                        last_request_time = time.time()
                         return f(params)
             except Exception as e:
                 if retry > 5:
